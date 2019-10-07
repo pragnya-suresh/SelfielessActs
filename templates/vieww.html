@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    
+    
+    <style>
+table.some_style3 td {
+background-color: #323F44;
+    text-align: center;
+    
+}
+
+table.some_style3 td:hover {
+background-color: #DAD8CF;
+}
+    table.some_style3 th {
+
+         text-align: center;
+        padding: 16px;
+        padding-left:80px;
+        padding-right:80px;
+        
+        
+}
+        
+        
+        
+        .img {
+    position: relative;
+    
+    width:  350px;
+    height: 350px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+
+        
+        
+        
+        
+</style>
+    
+    
+    
+    </head>
+    
+    <span id="source" style="display:none"></span>
+    
+
+    <div id="demo"> </div>
+   
+    <script>
+        var server_addr="http://192.168.1.5:8080" 
+
+    </script>
+    
+    <script>
+    var route="/api/v1/categories";
+    var table = document.createElement("TABLE");
+    table.setAttribute("class","some_style");
+    table.setAttribute("align", "center");
+    table.border = "1";
+    
+    function loadDoc() {
+     var data_file = server_addr+route;
+  //  document.write(data_file)
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var res=JSON.parse(this.responseText);
+        var key=Object.keys(res);
+        var val=Object.values(res);
+        var row = table.insertRow(-1);
+        var headerCell = document.createElement("TH");
+
+        headerCell.innerHTML = "Category"
+   
+        row.appendChild(headerCell);
+        var headerCell = document.createElement("TH");
+
+        headerCell.innerHTML = "Number of acts"
+        //document.write("    ",headerCell.innerHTML);
+
+        row.appendChild(headerCell);
+        //Add the data rows.
+
+         
+        for(var i=0;i< key.length;i++){
+            row = table.insertRow(-1);
+            var cell = row.insertCell(-1);
+            cell.innerHTML = key[i];
+            var cell = row.insertCell(-1);
+            cell.innerHTML = val[i];
+
+    }
+    disp(table);
+        
+    }
+  };
+  xhttp.open("GET", data_file, true);
+  xhttp.send();
+
+  }
+          
+          
+</script>
+        
+
+ 
+    
+    
+      <script>
+ var table = document.createElement("TABLE");
+    table.setAttribute("class","some_style3");
+    table.setAttribute("align", "center");
+    table.border = "1";
+    
+    function loadDoc() {
+     var data_file = server_addr+route;
+  //  document.write(data_file)
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var res=JSON.parse(this.responseText);
+   
+        
+   var key=Object.keys(res);
+        var val=Object.values(res);
+
+   //Add the header row.
+    var row = table.insertRow(-1);
+    var headerCell = document.createElement("TH");
+
+    headerCell.innerHTML = "Category"
+   //  document.write(headerCell.innerHTML);
+    row.appendChild(headerCell);
+    var headerCell = document.createElement("TH");
+
+    headerCell.innerHTML = "Number of acts"
+    //document.write("    ",headerCell.innerHTML);
+    
+    row.appendChild(headerCell);
+    //Add the data rows.
+
+         
+        for(var i=0;i< key.length;i++){
+        row = table.insertRow(-1);
+       
+            var cell = row.insertCell(-1);
+           
+            cell.innerHTML = key[i];
+             var cell = row.insertCell(-1);
+           
+            cell.innerHTML = val[i];
+        
+    }
+    disp(table);
+        
+       
+        
+   // if(document.body != null){ document.body.appendChild(table); }
+ 
+    //    document.getElementById("demo").innerHTML =  JSON.stringify(res);
+    //    document.getElementById("demo").innerHTML = "";
+    //    document.getElementById("demo").appendChild(table);
+    }
+  };
+  xhttp.open("GET", data_file, true);
+  xhttp.send();
+
+  }
+          
+          
+</script>
+        
+
+  <script>
+    var table = document.createElement("TABLE");
+    table.setAttribute("class","some_style2");
+    table.setAttribute("align", "center");
+    function sendact() {
+            var http_request = new XMLHttpRequest();
+            var category= document.getElementById("category").value;
+            route="/api/v1/categories/"+category+"/acts";
+            var data_file = server_addr+route;
+            http_request.onreadystatechange = function() {//Call a function when the state changes.
+               
+            if (this.readyState == 4 && this.status == 200) {
+                
+                var res=JSON.parse(this.responseText);
+                var key=Object.keys(res);
+                for(var i=0;i<key.length;i++){
+                    var row = table.insertRow(-1);
+                    var cell = row.insertCell(-1);
+                    var actId=res[i]['actId'];
+                    var caption=res[i]['caption'];
+                    var imgB64=res[i]['imgB64'];
+                    var timestamp=res[i]['timestamp'];
+                    var upvotes=res[i]['upvotes'];
+                    var username=res[i]['username'];
+                    document.getElementById('source').innerHTML=imgB64="data:image/jpeg;base64,"+imgB64;
+                    var image = new Image();
+                    image.src = document.getElementById('source').innerHTML;
+                    image.setAttribute("class","img");
+                    var div3=document.getElementById('div3').appendChild(image);
+                    //document.getElementById('capimg').appendChild(image); 
+                    var div4=document.createElement("div");
+                    div4.className="project_box_one";
+                    div4.innerHTML="Username:"+username+"<br>"+"Caption:"+caption+"<br>"+"Act Id:"+actId+"<br>"+"Timestamp:"+"<br>"+timestamp;
+                    document.getElementById("capimg").setAttribute("title",caption);
+                    var span=document.createElement("span");
+                    span.innerHTML="Likes:"+upvotes+"<br>";
+                    var upvote=document.createElement("button");
+                    upvote.className="btn";
+                    upvote.innerHTML="  Tap here to Upvote !";
+                    cell.appendChild(div3);
+                    var cell2 = row.insertCell(-1);
+                    cell2.appendChild(div4);
+                    cell2.appendChild(span);
+                    //alert(upvote);
+                    cell2.appendChild(upvote);
+                    
+                }
+                disp(table);     
+            }
+                else if(this.status==204){
+                    alert("Wrong category!");
+                    var cat=document.getElementById("category");
+                    cat.value="";
+
+                }
+                
+                else if(this.status==413){
+                     alert("Number of acts>500!");
+                    var cat=document.getElementById("category");
+                    cat.value="";
+                    
+                    }
+                
+        };
+    http_request.open("GET", data_file, true);
+    http_request.send();
+    return false;
+  }
+          
+    </script>
+    
+    
+    
+    
+
+
+<head>
+    <!-- ========== Meta Tags
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Cocoon -Portfolio">
+    <meta name="keywords" content="Cocoon , Portfolio">
+    <meta name="author" content="Pharaohlab">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- ========== Title ========== -->
+    <title> Portfolio </title>
+    <!-- ========== Favicon Ico ========== -->
+    <!--<link rel="icon" href="fav.ico">-->
+    <!-- ========== STYLESHEETS ========== -->
+    <!-- Bootstrap CSS -->
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts Icon CSS -->
+    <link href="../static/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../static/assets/css/et-line.css" rel="stylesheet">
+    <link href="../static/assets/css/ionicons.min.css" rel="stylesheet">
+    <!-- Carousel CSS -->
+    <link href="../static/assets/css/slick.css" rel="stylesheet">
+    <!-- Magnific-popup -->
+    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="../static/assets/css/animate.min.css">
+    <!-- Custom styles for this template -->
+    <link href="../static/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="loader">
+    <div class="loader-outter"></div>
+    <div class="loader-inner"></div>
+</div>
+
+<div class="body-container container-fluid">
+    <a class="menu-btn" href="javascript:void(0)">fable
+        <i class="ion ion-grid"></i>
+    </a>
+    <div class="row justify-content-center">
+        <!--=================== side menu ====================-->
+        <div class="col-lg-2 col-md-3 col-12 menu_block">
+            
+
+            <!--logo -->
+            <div class="logo_box">
+                <a href="#">
+                    <img src="../static/assets/img/logo.png" alt="cocoon">
+                </a>
+            </div>
+            <!--logo end-->
+
+            <!--main menu -->
+            <div class="side_menu_section">
+                <ul class="menu_nav">
+                    <li>
+                        <a href="portfolio.html">
+                            Home
+                        </a>
+                    </li>
+                    <li  class="menu_nav">
+                        <a href="upload.html">
+                            Upload
+                        </a>
+                    </li>
+                    <li class="menu_nav">
+                        <a  href="viewall.html">
+                        View Categories
+                            </a>
+                    </li>
+                      <li class="menu_nav">
+                        <a  href="sendcat.html">
+                        Total acts in a category
+                            </a>
+                    </li>
+                      <li class="menu_nav">
+                        <a href="vieww.html">
+                        View Acts in Category
+                            </a>
+                    </li>
+                </ul>
+            </div>
+            <!--main menu end -->
+
+            <!--filter menu -->
+              <div class="side_menu_section">
+                 
+                  
+                <h4 class="side_title"></h4>
+                <ul  id="filtr-container"  class="filter_nav">
+        
+                </ul>
+            </div>
+            <!--filter menu end -->
+        </div>
+        <!--=================== side menu end====================-->
+
+        <!--=================== content body ====================-->
+        <div id="parent" class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
+            <!--=================== filter portfolio start====================-->
+           <div id="tab"> 
+            <form method="get">
+                
+                Category:<br>
+                <input type="text" name="category" id="category">
+                <button id="cl"  onclick="sendact();">submit</button>
+                <span id="status" ></span><br>
+                <!--<input type="submit"> -->
+                
+            </form>
+            </div>
+          
+            <div id="div3"   class="grid-item animals  col-sm-12 col-md-6 col-lg-3">
+                    
+
+                            <a id="capimg"  href="" title="caption" >
+                                
+                        <div id="div4" class="project_box_one">
+                                   
+                               
+                                </div>
+                            </a>
+                    
+                    
+            </div>
+          
+            
+            <!--=================== filter portfolio end====================-->
+        </div>
+        
+        <!--=================== content body end ====================-->
+    </div>  
+</div>
+
+
+    
+<script>
+    
+     var tab=document.getElementById("tab");
+     //   alert("tab"+tab);
+    
+    </script>
+<script>
+    function disp(ele){
+       
+       // alert("tab"+tab);
+   
+    //    alert("ele"+ele);
+        if(tab!=null){
+            tab.innerHTML="";
+            //while(tab.hasChildNodes())
+              //  tab.removeChild(tab.firstChild);
+            if(ele!=null){
+    tab.appendChild(ele);
+}
+        }
+        
+    }
+   
+    
+    </script>
+   <script>
+    document.getElementById("cl").addEventListener("click", function(event){
+            //alert("here");
+            event.preventDefault();
+       // document.getElementById("tab").innerHTML="";
+        var category=document.getElementById("category");
+       
+        if(!category.value){
+            alert("Category required!");
+        document.getElementById("category").innerHTML="";
+        }
+        });
+    
+    </script>
+
+
+<!-- jquery -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="../static/assets/js/popper.js"></script>
+<script src="../static/assets/js/bootstrap.min.js"></script>
+<script src="../static/assets/js/waypoints.min.js"></script>
+<!--slick carousel -->
+<script src="../static/assets/js/slick.min.js"></script>
+<!--Portfolio Filter-->
+<script src="../static/assets/js/imgloaded.js"></script>
+<script src="../static/assets/js/isotope.js"></script>
+<!-- Magnific-popup -->
+<script src="../static/assets/js/jquery.magnific-popup.min.js"></script>
+<!--Counter-->
+<script src="../static/assets/js/jquery.counterup.min.js"></script>
+<!-- WOW JS -->
+<script src="../static/assets/js/wow.min.js"></script>
+<!-- Custom js -->
+<script src="../static/assets/js/main.js"></script>
+</body>
+</html>

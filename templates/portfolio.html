@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    
+    
+    <style>
+table.some_style td {
+background-color: #323F44;
+    text-align: center;
+    padding: 6px;
+}
+
+table.some_style td:hover {
+background-color: #DAD8CF;
+}
+    table.some_style th {
+
+         text-align: center;
+        padding: 16px;
+        padding-left:80px;
+        padding-right:80px;
+        
+        
+}
+</style>
+    
+    
+    
+    </head>
+    
+
+    <div id="demo"> </div>
+   
+    
+   
+     <script>
+        
+       
+        var server_addr="http://192.168.1.5:8080" 
+         var route="/api/v1/categories"
+    </script>
+
+    
+    
+      <script>
+ var table = document.createElement("TABLE");
+    table.setAttribute("class","some_style");
+    table.setAttribute("align", "center");
+    table.border = "1";
+    
+    function loadDoc() {
+     var data_file = server_addr+route;
+  //  document.write(data_file)
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var res=JSON.parse(this.responseText);
+        var key=Object.keys(res);
+        var val=Object.values(res);
+        var row = table.insertRow(-1);
+        var headerCell = document.createElement("TH");
+
+        headerCell.innerHTML = "Category"
+   
+        row.appendChild(headerCell);
+        var headerCell = document.createElement("TH");
+
+        headerCell.innerHTML = "Number of acts"
+        //document.write("    ",headerCell.innerHTML);
+
+        row.appendChild(headerCell);
+        //Add the data rows.
+
+         
+        for(var i=0;i< key.length;i++){
+            row = table.insertRow(-1);
+            var cell = row.insertCell(-1);
+            cell.innerHTML = key[i];
+            var cell = row.insertCell(-1);
+            cell.innerHTML = val[i];
+
+    }
+    disp(table);
+        
+    }
+  };
+  xhttp.open("GET", data_file, true);
+  xhttp.send();
+
+  }
+          
+          
+</script>
+        
+
+ 
+    
+    
+    
+    
+
+
+<head>
+    <!-- ========== Meta Tags
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Cocoon -Portfolio">
+    <meta name="keywords" content="Cocoon , Portfolio">
+    <meta name="author" content="Pharaohlab">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- ========== Title ========== -->
+    <title> Portfolio </title>
+    <!-- ========== Favicon Ico ========== -->
+    <!--<link rel="icon" href="fav.ico">-->
+    <!-- ========== STYLESHEETS ========== -->
+    <!-- Bootstrap CSS -->
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts Icon CSS -->
+    <link href="../static/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../static/assets/css/et-line.css" rel="stylesheet">
+    <link href="../static/assets/css/ionicons.min.css" rel="stylesheet">
+    <!-- Carousel CSS -->
+    <link href="../static/assets/css/slick.css" rel="stylesheet">
+    <!-- Magnific-popup -->
+    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="../static/assets/css/animate.min.css">
+    <!-- Custom styles for this template -->
+    <link href="../static/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="loader">
+    <div class="loader-outter"></div>
+    <div class="loader-inner"></div>
+</div>
+
+<div class="body-container container-fluid">
+    <a class="menu-btn" href="javascript:void(0)">fable
+        <i class="ion ion-grid"></i>
+    </a>
+    <div class="row justify-content-center">
+        <!--=================== side menu ====================-->
+        <div class="col-lg-2 col-md-3 col-12 menu_block">
+
+            <!--logo -->
+            <div class="logo_box">
+                <a href="#">
+                    <img src="../static/assets/img/logo.png" alt="cocoon">
+                </a>
+            </div>
+            <!--logo end-->
+
+            <!--main menu -->
+            <div class="side_menu_section">
+                <ul class="menu_nav">
+                    <li>
+                        <a href="portfolio.html">
+                            Home
+                        </a>
+                    </li>
+                    <li  class="menu_nav">
+                        <a  href="upload.html">
+                            Upload
+                        </a>
+                    </li>
+                    <li class="menu_nav">
+                        <a href="viewall.html" >
+                        View Categories
+                            </a>
+                    </li>
+                      <li class="menu_nav">
+                        <a  href="sendcat.html">
+                        Total acts in a category
+                            </a>
+                    </li>
+                      <li class="menu_nav">
+                        <a href="vieww.html">
+                        View Acts in Category
+                            </a>
+                    </li>
+                </ul>
+            </div>
+            <!--main menu end -->
+
+        </div>
+        <!--=================== side menu end====================-->
+
+        <!--=================== content body ====================-->
+        <div id="tab" class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
+            <!--=================== filter portfolio start====================-->
+            <div class="portfolio gutters grid img-container">
+                <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
+
+                <div  class="grid-item animals  col-sm-12 col-md-6 col-lg-3">
+
+                            <a href="../static/assets/img/portfolio/port/animal1.jpg" title="Despite having seen all the atrocities of war, this soldier still took the time to feed a kitten with a pipette to rescue him">
+
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/animal1.jpg" alt="pro1" />
+                                    <div class="product_info">
+
+                                        <div class="product_info_text">
+
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Animals</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                <div class="grid-item animals col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/animal5.jpg" title="Two Norwegian guys rescuing a baby lamb drowning in the ocean.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/animal5.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Animals</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item society col-sm-12 col-md-6 col-lg-3">
+                     <a href="../static/assets/img/portfolio/port/society1.jpg" title=".Mumbai doctor who runs a free tiffin service for the elderly -Dr. Uday Modi brings free food to the elderly who have been abandoned by their own children. His service, that runs in Bhayandar, Mumbai, feeds close to 500 old people daily.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/society1.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Society</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item environment col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/env1.jpg" title="Made this today with old newspapers! #rainbow #recycling #environment">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/env1.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Environment</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item  people col-sm-12 col-md-6 col-lg-3">
+                     <a href="../static/assets/img/portfolio/port/person1.png" title="London marathoner who stopped metres away from the finish line to help struggling runner">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/person1.png" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>People</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item  environment col-sm-12 col-md-6 col-lg-3">
+                   <a href="../static/assets/img/portfolio/port/env4.jpg" title="Today my family and I decided to pick up the trash in our public park. People don’t realize the effect of littering on our environment and I think it’s an important lesson to treat our children.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/env4.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Environment</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item  animals col-sm-12 col-md-6 col-lg-3">
+                   <a href="../static/assets/img/portfolio/port/animal3.jpg" title="After following the Marines numerous miles, a soft-hearted marine picked the puppy up and carried the puppy in his drop pouch.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/animal3.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Animals</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item society  col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/society3.png" title="Jamshedpur student who donated her pocket money for building of toilets Mondrita Chatterjee, a class seven student, emptied her treasure bucket and donated Rs. 24,000 toward the construction of toilets for which she was awarded at the National Summit on Health and Wellness 2017.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/society3.png" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Society</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item people col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/person3.png" title="This man stopped running to catch his train to help an older woman with her bags.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/person3.png" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>People</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item  people col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/person2.png" title="New Jersey woman who donated a part of her liver to the girl she babysits Kiersten Miles, a 22-year-old resident of New Jersey, recently donated a part of her liver to Talia, a toddler who she babysits. Talia wouldn't have survived her condition without a transplant. Miles very generously offered to donate a part of her own organ which saved Talia's life.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/person2.png" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>People</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item  people  col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/person4.png" title="Thousands of people were left without electricity when hurricane Sandy hit the East Coast. People allowed strangers to charge their phones to let the relatives know they were alright. ">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/person4.png" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>People</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item society col-sm-12 col-md-6 col-lg-3">
+                     <a href="../static/assets/img/portfolio/port/society4.png" title="Nand Lal Gupta-This wonderful 85-year old man has been helping the remotest villages in Himachal Pradesh through his inventions for over 50 years now. A self-trained scientist, Gupta’s high tech innovations in the field of adhesives, pine boards as wooden board substitutes and soil bricks have awed scientists working in various reputed institutions across the country.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/society4.png" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Society</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item society col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/society2.png" title="8-year-old girl who donated her savings to drought-hit farmers -Nagpur resident Rashika Joshi, 8, donated her pocket savings to help drought-hit farmers. After getting inspired by actor Aamir Khan - who had earlier offered donations to the farmers - Jain simply couldn't sit idle and do nothing.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/society2.png" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Society</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item  environment col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/env3.jpg" title="Today I decided to fix my neighbor’s leaky tap. It’s such a waste of water! I hope this deed made at least a tiny difference.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/env3.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Environment</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item  environment  col-sm-12 col-md-6 col-lg-3">
+                    <a href="../static/assets/img/portfolio/port/env2.jpg" title="Tree planting drive conducted by Nepalese school. Nothing more precious than trees and children together. :)">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/env2.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Environment</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+                <div class="grid-item animals col-sm-12 col-md-6 col-lg-3">
+                     <a href="../static/assets/img/portfolio/port/animal4.jpg" title="Man risked his life to rescue a kangaroo in Queensland’s floods.">
+                                <div class="project_box_one">
+                                    <img src="../static/assets/img/portfolio/port/animal4.jpg" alt="pro1" />
+                                    <div class="product_info">
+                                        <div class="product_info_text">
+                                            <div class="product_info_text_inner">
+                                                <div><button type="submit" class="btn">UpVote</button>
+                                                    <button type="submit" class="btn">Delete</button></div>
+                                                <i class="ion ion-plus"></i>
+                                                <h4>Animals</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                </div>
+
+
+            </div>
+            <!--=================== filter portfolio end====================-->
+        </div>
+        <!--=================== content body end ====================-->
+    </div>  
+</div>
+
+
+    
+<script>
+    
+     var tab=document.getElementById("tab");
+     //   alert("tab"+tab);
+    
+    </script>
+<script>
+    function disp(ele){
+       
+       // alert("tab"+tab);
+   
+    //    alert("ele"+ele);
+        if(tab!=null){
+            //tab.innerHTML="";
+            while(tab.hasChildNodes())
+                tab.removeChild(tab.firstChild);
+            if(ele!=null){
+    tab.appendChild(ele);
+}
+        }
+        
+    }
+   
+    
+    </script>
+   
+
+
+<!-- jquery -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="../static/assets/js/popper.js"></script>
+<script src="../static/assets/js/bootstrap.min.js"></script>
+<script src="../static/assets/js/waypoints.min.js"></script>
+<!--slick carousel -->
+<script src="../static/assets/js/slick.min.js"></script>
+<!--Portfolio Filter-->
+<script src="../static/assets/js/imgloaded.js"></script>
+<script src="../static/assets/js/isotope.js"></script>
+<!-- Magnific-popup -->
+<script src="../static/assets/js/jquery.magnific-popup.min.js"></script>
+<!--Counter-->
+<script src="../static/assets/js/jquery.counterup.min.js"></script>
+<!-- WOW JS -->
+<script src="../static/assets/js/wow.min.js"></script>
+<!-- Custom js -->
+<script src="../static/assets/js/main.js"></script>
+</body>
+</html>

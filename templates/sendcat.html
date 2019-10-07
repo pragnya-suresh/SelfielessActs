@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <script>
+        var server_addr="http://192.168.1.5:8080" 
+      
+    </script>
+    
+       
+ 
+    
+    
+ <script>
+    var table = document.createElement("TABLE");
+    table.setAttribute("class","some_style");
+    table.setAttribute("align", "center");
+    table.border = "1";
+    
+        
+        function sendcat() {
+            
+            var http_request = new XMLHttpRequest();
+            var category= document.getElementById("category").value;
+        
+            route="/api/v1/categories/"+category+"/acts/size/";
+            var data_file = server_addr+route;
+           // alert(data_file);
+           
+            http_request.onreadystatechange = function() {//Call a function when the state changes.
+            if (this.readyState == 4 &&this.status ==200) {
+              //  alert(this.responseText);
+                var res=JSON.parse(this.responseText);
+                  var jsonObj = JSON.parse(this.responseText);
+                    //alert("status"+jsonObj.status);
+                    
+               // alert(JSON.stringify(res));
+                var key=Object.keys(res);
+                var val=Object.values(res);
+        
+                //Add the header row.
+                var row = table.insertRow(-1);
+                var headerCell = document.createElement("TH");
+                headerCell.innerHTML = "Category"
+                //  document.write(headerCell.innerHTML);
+                row.appendChild(headerCell);
+                var headerCell = document.createElement("TH");
+                headerCell.innerHTML = "Number of acts"
+                //document.write("    ",headerCell.innerHTML);
+                row.appendChild(headerCell);
+                //Add the data rows.
+                
+                    row = table.insertRow(-1);
+                    var cell = row.insertCell(-1);
+                    cell.innerHTML = category;
+                    var cell = row.insertCell(-1);
+                    cell.innerHTML = val[0];
+        
+                    
+                disp(table);
+                }
+                else{
+
+                    document.getElementById("status").innerHTML="Empty Response or Wrong category";
+                    
+                 
+                    document.getElementById("category").value= '';
+                
+                }
+        };
+    http_request.open("GET", data_file, true);
+    http_request.send();
+
+  }
+          
+    </script>
+    
+<head>
+    <!-- ========== Meta Tags
+<a href=http://192.168.1.4:8080/api/v1/categories>clickhere</a>
+can we put server_addr=http://192.168.1.4:8080 as a variable and use ========== -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Cocoon -Portfolio">
+    <meta name="keywords" content="Cocoon , Portfolio">
+    <meta name="author" content="Pharaohlab">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- ========== Title ========== -->
+    <title> Portfolio </title>
+    <!-- ========== Favicon Ico ========== -->
+    <!--<link rel="icon" href="fav.ico">-->
+    <!-- ========== STYLESHEETS ========== -->
+    <!-- Bootstrap CSS -->
+    <link href=" ../static/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts Icon CSS -->
+    <link href=" ../static/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href=" ../static/assets/css/et-line.css" rel="stylesheet">
+    <link href=" ../static/assets/css/ionicons.min.css" rel="stylesheet">
+    <!-- Carousel CSS -->
+    <link href=" ../static/assets/css/slick.css" rel="stylesheet">
+    <!-- Magnific-popup -->
+    <link rel="stylesheet" href=" ../static/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href=" ../static/assets/css/animate.min.css">
+    <!-- Custom styles for this template -->
+    <link href=" ../static/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="loader">
+    <div class="loader-outter"></div>
+    <div class="loader-inner"></div>
+</div>
+
+<div class="body-container container-fluid">
+    <a class="menu-btn" href="javascript:void(0)">
+        <i class="ion ion-grid"></i>
+    </a>
+    <div class="row justify-content-center">
+        <!--=================== side menu ====================-->
+        <div class="col-lg-2 col-md-3 col-12 menu_block">
+
+            <!--logo -->
+            <div class="logo_box">
+                <a href="#">
+                    <img src=" ../static/assets/img/logo.png" alt="cocoon">
+                </a>
+            </div>
+            <!--logo end-->
+
+            <!--main menu -->
+            <div class="side_menu_section">
+                <ul class="menu_nav">
+                    <li>
+                        <a href="portfolio.html">
+                            Home
+                        </a>
+                    </li>
+                    <li  class="menu_nav">
+                        <a href="upload.html">
+                            Upload
+                        </a>
+                    </li>
+                     <li class="menu_nav">
+                        <a href="viewall.html">
+                        View Categories
+                            </a>
+                    </li>
+                      <li class="menu_nav">
+                        <a  href="sendcat.html">
+                        Total acts in a category
+                            </a>
+                    </li>
+                      <li class="menu_nav">
+                        <a href="vieww.html">
+                        View Acts in Category
+                            </a>
+                    </li>
+                </ul>
+            </div>
+            <!--main menu end -->
+
+         
+        </div>
+        <!--=================== side menu end====================-->
+        <div id="tab" class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
+            <!-- <form method="post" action="http://192.168.0.102:8080/api/v1/acts/"> -->
+            <form method="get">
+                
+                Category:<br>
+                <input type="text" name="category" id="category">
+                <button id="cl" onclick="sendcat();">submit</button>
+                <span id="status"></span><br>
+                
+                <!--<input type="submit"> -->
+                
+            </form>
+        </div>
+    </div>  
+</div>
+
+<script>
+    document.getElementById("cl").addEventListener("click", function(event){
+            //alert("here");
+            event.preventDefault()
+        });
+    
+    </script>
+        
+<script>
+    
+     var tab=document.getElementById("tab");
+     //   alert("tab"+tab);
+    
+    </script>
+<script>
+    function disp(ele){
+       
+       // alert("tab"+tab);
+   
+    //    alert("ele"+ele);
+        if(tab!=null){
+            //tab.innerHTML="";
+            while(tab.hasChildNodes())
+                tab.removeChild(tab.firstChild);
+            if(ele!=null){
+    tab.appendChild(ele);
+}
+        }
+        
+    }
+   
+    
+    </script>
+
+<!-- jquery -->
+<script src=" ../static/assets/js/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src=" ../static/assets/js/popper.js"></script>
+<script src=" ../static/assets/js/bootstrap.min.js"></script>
+<script src=" ../static/assets/js/waypoints.min.js"></script>
+<!--slick carousel -->
+<script src=" ../static/assets/js/slick.min.js"></script>
+<!--Portfolio Filter-->
+<script src=" ../static/assets/js/imgloaded.js"></script>
+<script src=" ../static/assets/js/isotope.js"></script>
+<!-- Magnific-popup -->
+<script src=" ../static/assets/js/jquery.magnific-popup.min.js"></script>
+<!--Counter-->
+<script src=" ../static/assets/js/jquery.counterup.min.js"></script>
+<!-- WOW JS -->
+<script src=" ../static/assets/js/wow.min.js"></script>
+<!-- Custom js -->
+<script src=" ../static/assets/js/main.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!--10-10-2018:05-05-05 -->
